@@ -3,26 +3,40 @@ Harmonious Attention Attribute Convolutional Neural Network (HAT-CNN )
 HAT-CNN is an modified version of the Harmonious Attention Attribute Convolutional Neural Network (HACNN). It is implemented on top of the existing HA-CNN implementation of torchreid library[1] whose license are given in the repo.
 
 
-Get started: 30 seconds to Torchreid
--------------------------------------
-1. Import ``torchreid``
+1. Clone ``torchreid`` repo.
+ ``` 
+!git clone https://github.com/KaiyangZhou/deep-person-reid.git 
+ ``` 
 
+2. Modify the following code files with the corresponding file codes in this repo.
+ ``` 
+ deep-person-reid/torchreid/data/datasets/image/market1501.py
+ deep-person-reid/torchreid/data/datasets/dataset.py
+ deep-person-reid/torchreid/engine/engine.py
+ deep-person-reid/torchreid/engine/image/softmax.py
+ deep-person-reid/torchreid/models/hacnn.py
+ ``` 
+ 
+3. Upload the annots.csv to the workspace.
+ 
+
+3. Import ``torchreid``
 
  ``` 
     import torchreid
  ```
-2. Load data manager
+4. Load data manager
 
  ```    
     datamanager = torchreid.data.ImageDataManager(
         root='reid-data',
         sources='market1501',
         targets='market1501',
-        height=256,
-        width=128,
-        batch_size_train=32,
-        batch_size_test=100,
-        transforms=['random_flip', 'random_crop']
+        height=160,
+        width=64,
+        batch_size_train=16,
+        batch_size_test=16,
+        transforms=None
     ) 
   ```
 
@@ -30,7 +44,7 @@ Get started: 30 seconds to Torchreid
 
   ```  
     model = torchreid.models.build_model(
-        name='resnet50',
+        name='hacnn',
         num_classes=datamanager.num_train_pids,
         loss='softmax',
         pretrained=True
@@ -40,14 +54,14 @@ Get started: 30 seconds to Torchreid
 
     optimizer = torchreid.optim.build_optimizer(
         model,
-        optim='adam',
-        lr=0.0003
+        optim='sgd',
+        lr=0.03
     )
 
     scheduler = torchreid.optim.build_lr_scheduler(
         optimizer,
-        lr_scheduler='single_step',
-        stepsize=20
+        lr_scheduler='multi_step',
+        stepsize=[150, 225]
     )
    ```
 4. Build engine
@@ -65,10 +79,10 @@ Get started: 30 seconds to Torchreid
 
 ```
     engine.run(
-        save_dir='log/resnet50',
-        max_epoch=60,
-        eval_freq=10,
-        print_freq=10,
+        save_dir='log/hacnn',
+        max_epoch=240,
+        eval_freq=20,
+        print_freq=404,
         test_only=False
     )
 ```
