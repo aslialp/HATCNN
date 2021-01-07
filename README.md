@@ -17,7 +17,7 @@ HAT-CNN is an modified version of the Harmonious Attention Attribute Convolution
  deep-person-reid/torchreid/models/hacnn.py
  ``` 
  
-3. Upload the annots.csv to the workspace.
+3. Upload the ``annots.csv`` to the workspace.
  
 
 3. Import ``torchreid``
