@@ -229,7 +229,9 @@ class HACNN(nn.Module):
 		  ConvBlock(3, 32, 3, s=2, p=1),
                   InceptionA(32, nchannels[0]),
                   InceptionB(nchannels[0], nchannels[0]),
-                  InceptionA(nchannels[0], nchannels[2]),
+		  InceptionA(nchannels[0], nchannels[1]),
+                  InceptionB(nchannels[1], nchannels[1]),
+                  InceptionA(nchannels[1], nchannels[2]),
                   InceptionB(nchannels[2], nchannels[2]),
         )
 
