@@ -1,6 +1,6 @@
 Harmonious Attention Attribute Convolutional Neural Network (HAT-CNN )
 ===========
-HAT-CNN is an modified version of the Harmonious Attention Attribute Convolutional Neural Network (HACNN). It is implemented on top of the existing HA-CNN implementation of torchreid library[1] whose license are given in the repo.
+HAT-CNN is a modified version of the Harmonious Attention Attribute Convolutional Neural Network (HACNN). It is implemented on top of the existing HA-CNN implementation of torchreid library[1] whose license are given in the repo.
 
 
 1. Clone ``torchreid`` repo.
